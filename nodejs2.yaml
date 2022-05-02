@@ -16,8 +16,8 @@ spec:
     spec:
       containers:
       - name: prod-container
-        image: "appv2:latest"
-        imagePullPolicy: Never
+        image: "viraj5132/canary:latest"
+        imagePullPolicy: Always
         ports:
         - containerPort: 3000
 ---
