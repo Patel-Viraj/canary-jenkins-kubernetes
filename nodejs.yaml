@@ -17,7 +17,7 @@ spec:
       containers:
       - name: stage-container
         image: "viraj5132/canary:latest"
-        imagePullPolicy: Never
+        imagePullPolicy: Always
         ports:
         - containerPort: 3000
 ---
