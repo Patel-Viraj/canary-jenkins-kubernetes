@@ -35,7 +35,7 @@ pipeline{
               when { branch 'prod'}
             steps {
                 sshagent(['3.91.222.148']) {
-                    sh "echostaring deploy the image in Kubernetes"
+                    sh "echo staring deploy the image in Kubernetes"
                     sh "scp -o StrictHostKeyChecking=no nodejs2.yaml  ubuntu@$DEPLOY_IP:/home/ubuntu/"
                     sh "ssh ubuntu@$DEPLOY_IP kubectl apply -f nodejs2.yaml" 
                 }
