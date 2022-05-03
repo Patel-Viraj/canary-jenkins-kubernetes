@@ -44,7 +44,7 @@ spec:
     - host: stage.info
       http:
         paths:
-          - path: /stage
+          - path: /
             pathType: Prefix
             backend:
               service:
