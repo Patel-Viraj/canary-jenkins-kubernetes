@@ -41,10 +41,10 @@ metadata:
   name: stage-ingress
 spec:
   rules:
-    - host: nodeapp.info
+    - host: stage.info
       http:
         paths:
-          - path: /
+          - path: /stage
             pathType: Prefix
             backend:
               service:
