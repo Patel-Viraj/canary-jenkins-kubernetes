@@ -44,7 +44,7 @@ metadata:
   name: appv2-ingress
 spec:
   rules:
-    - host: prod.info
+    - host: stage.info
       http:
         paths:
           - path: /
