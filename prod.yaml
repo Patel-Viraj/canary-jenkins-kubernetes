@@ -40,7 +40,7 @@ kind: Ingress
 metadata:
   annotations:
     nginx.ingress.kubernetes.io/canary: "true"
-    nginx.ingress.kubernetes.io/canary-weight: "30"
+    nginx.ingress.kubernetes.io/canary-weight: "40"
   name: prod-ingress
 spec:
   rules:
