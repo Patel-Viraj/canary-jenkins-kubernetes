@@ -8,7 +8,7 @@ pipeline{
                 sshagent(['3.91.222.148']) {
                     sh "echo staring deploy the image in Kubernetes"
                     // sh "scp -o StrictHostKeyChecking=no stage.yaml ubuntu@$DEPLOY_IP:/home/ubuntu/"
-                    sh "ssh ubuntu@$DEPLOY_IP kubectl rollout restart deployment stage " 
+                    // sh "ssh ubuntu@$DEPLOY_IP kubectl rollout restart deployment stage " 
                 }
             }
         }
@@ -31,7 +31,7 @@ pipeline{
                 sshagent(['3.91.222.148']) {
                     sh "echo staring deploy the image in Kubernetes"
                     sh "scp -o StrictHostKeyChecking=no prod.yaml  ubuntu@$DEPLOY_IP:/home/ubuntu/"
-                    sh "ssh ubuntu@$DEPLOY_IP kubectl apply -f prod.yaml" 
+                    sh "ssh ubuntu@$DEPLOY_IP kubectl rollout restart deployment prod " 
                 }
             }
         }
