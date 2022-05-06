@@ -40,11 +40,11 @@ kind: Ingress
 metadata:
   annotations:
     nginx.ingress.kubernetes.io/canary: "true"
-    nginx.ingress.kubernetes.io/canary-weight: "30"
-  name: appv2-ingress
+    nginx.ingress.kubernetes.io/canary-weight: "40"
+  name: prod-ingress
 spec:
   rules:
-    - host: prod.info
+    - host: stage.info
       http:
         paths:
           - path: /

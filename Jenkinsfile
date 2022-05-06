@@ -1,6 +1,17 @@
 pipeline{
     agent any
     stages {
+
+          stage('Deploy to Kubernetes in stage') {
+              when { branch 'stage'}
+            steps {
+                sshagent(['3.91.222.148']) {
+                    sh "echo staring deploy the image in Kubernetes"
+                    // sh "scp -o StrictHostKeyChecking=no stage.yaml ubuntu@$DEPLOY_IP:/home/ubuntu/"
+                    sh "ssh ubuntu@$DEPLOY_IP kubectl rollout restart deployment stage " 
+                }
+            }
+        }
         stage('Build Docker Image') {
             steps {
                 sh "echo staring build the image"
@@ -14,30 +25,13 @@ pipeline{
                 sh 'docker push viraj5132/canary:latest'
             }
         }
-        stage('Remove Docker Image') {
-            steps {
-                   sh "echo staring deploy the image"
-            //       sh "docker rmi -f viraj5132/nodejsapp-1.0"  
-            //       sh "ssh ubuntu@$DEPLOY_IP kubectl delete deploy nodejs-app"  
-            }
-        }
-        stage('Deploy to Kubernetes in stage') {
+         stage('Deploy to Kubernetes in prod') {
               when { branch 'stage'}
             steps {
                 sshagent(['3.91.222.148']) {
                     sh "echo staring deploy the image in Kubernetes"
-                    sh "scp -o StrictHostKeyChecking=no stage.yaml ubuntu@$DEPLOY_IP:/home/ubuntu/"
-                    sh "ssh ubuntu@$DEPLOY_IP kubectl apply -f stage.yaml" 
-                }
-            }
-        }
-         stage('Deploy to Kubernetes in prod') {
-              when { branch 'prod'}
-            steps {
-                sshagent(['3.91.222.148']) {
-                    sh "echo staring deploy the image in Kubernetes"
                     sh "scp -o StrictHostKeyChecking=no prod.yaml  ubuntu@$DEPLOY_IP:/home/ubuntu/"
-                    sh "ssh ubuntu@$DEPLOY_IP kubectl apply -f prod.yaml" 
+                    sh "ssh ubuntu@$DEPLOY_IP kubectl rollout restart deployment prod " 
                 }
             }
         }
