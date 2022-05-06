@@ -2,7 +2,7 @@ pipeline{
     agent any
     stages {
 
-          stage('Deploy to Kubernetes in stage') {
+          stage('Deploy to Kubernetes old version is replacing') {
               when { branch 'prod'}
             steps {
                 sshagent(['3.91.222.148']) {
