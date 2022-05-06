@@ -3,7 +3,7 @@ pipeline{
     stages {
 
           stage('Deploy to Kubernetes in stage') {
-              when { branch 'stage'}
+              when { branch 'prod'}
             steps {
                 sshagent(['3.91.222.148']) {
                     sh "echo staring deploy the image in Kubernetes"
@@ -13,12 +13,14 @@ pipeline{
             }
         }
         stage('Build Docker Image') {
+              when { branch 'prod'}
             steps {
                 sh "echo staring build the image"
                 sh 'docker build -t viraj5132/canary:latest .'
             }
         }
         stage('Deploy Docker Image') {
+             when { branch 'prod'}
             steps {
                 sh "echo staring deploy the image"
                 sh 'docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD'
@@ -26,7 +28,7 @@ pipeline{
             }
         }
          stage('Deploy to Kubernetes in prod') {
-              when { branch 'stage'}
+              when { branch 'prod'}
             steps {
                 sshagent(['3.91.222.148']) {
                     sh "echo staring deploy the image in Kubernetes"
