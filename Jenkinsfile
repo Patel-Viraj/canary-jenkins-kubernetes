@@ -18,11 +18,12 @@ pipeline{
             steps {
                    sh "echo staring deploy the image"
             //       sh "docker rmi -f viraj5132/nodejsapp-1.0"  
-            //       sh "ssh ubuntu@$DEPLOY_IP kubectl delete deploy nodejs-app"  
+            //       sh "ssh ubuntu@$DEPLOY_IP kubectl delete deploy nodejs-app" 
+            //kubectl rollout restart deployment green 
             }
         }
         stage('Deploy to Kubernetes in stage') {
-              when { branch 'prod'}
+              when { branch 'stage'}
             steps {
                 sshagent(['3.91.222.148']) {
                     sh "echo staring deploy the image in Kubernetes"
@@ -32,7 +33,7 @@ pipeline{
             }
         }
          stage('Deploy to Kubernetes in prod') {
-              when { branch 'stage'}
+              when { branch 'prod'}
             steps {
                 sshagent(['3.91.222.148']) {
                     sh "echo staring deploy the image in Kubernetes"
