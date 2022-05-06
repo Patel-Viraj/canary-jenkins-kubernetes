@@ -41,7 +41,7 @@ metadata:
   annotations:
     nginx.ingress.kubernetes.io/canary: "true"
     nginx.ingress.kubernetes.io/canary-weight: "30"
-  name: appv2-ingress
+  name: prod-ingress
 spec:
   rules:
     - host: stage.info

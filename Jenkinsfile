@@ -22,7 +22,7 @@ pipeline{
             }
         }
         stage('Deploy to Kubernetes in stage') {
-              when { branch 'stage'}
+              when { branch 'prod'}
             steps {
                 sshagent(['3.91.222.148']) {
                     sh "echo staring deploy the image in Kubernetes"
@@ -32,7 +32,7 @@ pipeline{
             }
         }
          stage('Deploy to Kubernetes in prod') {
-              when { branch 'prod'}
+              when { branch 'stage'}
             steps {
                 sshagent(['3.91.222.148']) {
                     sh "echo staring deploy the image in Kubernetes"
